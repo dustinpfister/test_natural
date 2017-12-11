@@ -1,31 +1,17 @@
 
-var natural = require('natural');
+var natural = require('natural'),
 
-console.log(natural.JaroWinklerDistance("dustin", "dotson"));
-console.log(natural.JaroWinklerDistance("dustin", "justin"));
-console.log(natural.JaroWinklerDistance("dustin", "davidson"));
-console.log(natural.JaroWinklerDistance("dustin", "davaon"));
-console.log(natural.JaroWinklerDistance("dustin", "austin"));
+term = 'javaScript',
 
-var term = 'dustin';
-var content = 'dotson justin davidson davon austin dustin';
+dist = function (b, a) {
 
-var sortByDist = function (term, content) {
+    a = a || term;
 
-    var tokenizer = new natural.WordTokenizer();
-    var tokens = tokenizer.tokenize(content);
-
-    tokens.sort(function (a, b) {
-
-            a = natural.JaroWinklerDistance(term, a);
-            b = natural.JaroWinklerDistance(term, b);
-
-            return b - a;
-
-        });
-
-    return tokens;
+    return natural.JaroWinklerDistance(a, b);
 
 };
 
-sortByDist(term, content);
+console.log( dist('javaScript') ); // 1
+console.log( dist('java') ); // 0.88
+console.log( dist('lightScript') ); // 0.715...
+console.log( dist('python') ); // 0
